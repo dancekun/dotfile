@@ -1,7 +1,7 @@
 " 永続化
 if has('persistent_undo')
   set undodir=~/.vim/undo
-  set undofile                                                                                                                                   
+  set undofile
 endif
 
 " プラグイン
@@ -20,10 +20,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-plug', {'dir': '~/.vim/plugged/vim-plug/autoload'}
   Plug 'Shougo/unite.vim'
   Plug 'ujihisa/unite-colorscheme'
+  Plug 'ConradIrwin/vim-bracketed-paste'
+"補完
   Plug 'Shougo/neocomplete.vim'
-  "#Pythonmode
-"  Plug 'davidhalter/jedi-vim'
-  Plug 'klen/python-mode'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'zchee/deoplete-jedi'
+  Plug 'davidhalter/jedi-vim'
+" Plug 'klen/python-mode'
   Plug 'nvie/vim-flake8'
   Plug 'hynek/vim-python-pep8-indent'
   Plug 'vim-airline/vim-airline'
@@ -39,6 +44,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'kannokanno/previm'
   Plug 'tyru/open-browser.vim'
   Plug 'cocopon/iceberg.vim'
+  " pyenv, virtualenv
+  Plug 'miyakogi/vim-virtualenv'
+  Plug 'lambdalisue/vim-pyenv'
 call plug#end()
 
 let g:jedi#force_py_version = 3
@@ -62,9 +70,8 @@ let g:lightline.colorscheme = 'railscasts'
 set laststatus=2
 
 "color scheme
-colorscheme hybrid
+colorscheme neodark
 set background=dark
-"let g:hybrid#background = '#202020'
 " neodark
 let g:neodark#use_256color = 0
 let g:neodark#background = '#202020'
@@ -102,3 +109,23 @@ nmap <Leader><Tab> <C-w>w
 if argc() == 0
   let g:nerdtree_tabs_open_on_console_startup = 1
 end
+
+" deoplete
+"let g:deoplete#enable_at_startup = 1
+"inoremap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
+"inoremap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
+"let g:python3_host_prog = '/Users/akira/.pyenv/shims/python'
+"let g:deoplete#sources#jedi#python_path = '/Users/akira/.pyenv/shims/python'
+
+" 補完
+let g:jedi#auto_initialization = 1
+"autocmd FileType python setlocal omnifunc=jedi#completions
+"let g:jedi#completions_enabled = 0
+"let g:jedi#auto_vim_configuration = 0
+
+"if !exists('g:neocomplete#force_omni_input_patterns')
+"        let g:neocomplete#force_omni_input_patterns = {}
+"endif
+
+" let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
